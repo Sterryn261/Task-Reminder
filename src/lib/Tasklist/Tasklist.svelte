@@ -16,10 +16,24 @@
         : elem.deleted === false;
     });
   }
+  function addtask(Context) {
+    const id =
+      tasklist.length === 0
+        ? 1
+        : Math.max(...tasklist.map((elem) => elem.id)) + 1;
+    tasklist.push({
+      id: id,
+      context: Context.detail,
+      completed: false,
+      important: false,
+      deleted: false,
+    });
+    tasklist = tasklist;
+  }
 </script>
 
 <div class="tasklist">
-  <Addtask />
+  <Addtask on:addtask={addtask} />
   <span> Or using Ctrl + Enter to add.</span>
 
   <div class="tasks">

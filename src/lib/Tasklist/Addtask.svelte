@@ -1,13 +1,27 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+  let dispatch = createEventDispatcher();
+
+  let textarea;
+  let context;
 </script>
 
 <div class="add-task">
   <form
     on:submit|preventDefault={() => {
-      console.log("added");
+      dispatch("addtask", context);
+      context = "";
     }}
   >
-    <textarea placeholder="New task..." />
+    <textarea
+      placeholder="New task..."
+      bind:this={textarea}
+      bind:value={context}
+      on:input={() => {
+        textarea.style.height = "auto";
+        textarea.style.height = textarea.scrollHeight + "px";
+      }}
+    />
     <button type="submit">Add</button>
   </form>
 </div>
@@ -16,12 +30,13 @@
   .add-task {
     textarea {
       resize: none;
+      overflow-y: hidden;
 
       font-family: Verdana, Geneva, Tahoma, sans-serif;
       font-size: 100%;
 
       width: 51%;
-      height: 2em;
+      min-height: 2em;
       padding: 0.5em;
       border-radius: 1em;
     }

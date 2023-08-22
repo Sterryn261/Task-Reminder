@@ -10,8 +10,8 @@
   };
   $: {
     tasks.all = tasklist.filter((elem) => elem.deleted === false).length;
-    tasks.completed = tasklist.filter((elem) => elem.completed === true).length;
-    tasks.pending = tasklist.filter((elem) => elem.completed === false).length;
+    tasks.completed = tasklist.filter((elem) => elem.completed === true && elem.deleted === false).length;
+    tasks.pending = tasklist.filter((elem) => elem.completed === false && elem.deleted === false).length;
     tasks.deleted = tasklist.filter((elem) => elem.deleted === true).length;
   }
 </script>

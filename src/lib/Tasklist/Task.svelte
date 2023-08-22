@@ -4,7 +4,10 @@
 
 <div class="task">
   <div class="main-context">
-    <button title="Mark as completed" style:background-color = {task.completed === true ? "lightgreen" : "yellow"}/>
+    <button
+      title="Mark as completed"
+      style:background-color={task.completed === true ? "lightgreen" : "yellow"}
+    />
     <div class="context">{task.context}</div>
   </div>
   <div class="sub-context">

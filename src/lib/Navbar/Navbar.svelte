@@ -7,7 +7,7 @@
 
 <nav>
   <div class="title">Task Reminder</div>
-  <Filter bind:tasklist bind:filter/>
+  <Filter bind:tasklist bind:filter />
   <button class="edit-mode"> Edit mode </button>
 </nav>
 

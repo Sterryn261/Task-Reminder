@@ -10,32 +10,56 @@
   };
   $: {
     tasks.all = tasklist.filter((elem) => elem.deleted === false).length;
-    tasks.completed = tasklist.filter((elem) => elem.completed === true && elem.deleted === false).length;
-    tasks.pending = tasklist.filter((elem) => elem.completed === false && elem.deleted === false).length;
+    tasks.completed = tasklist.filter(
+      (elem) => elem.completed === true && elem.deleted === false
+    ).length;
+    tasks.pending = tasklist.filter(
+      (elem) => elem.completed === false && elem.deleted === false
+    ).length;
     tasks.deleted = tasklist.filter((elem) => elem.deleted === true).length;
   }
 </script>
 
 <div class="context-filter">
-  <button class="all" on:click={() => {filter = "all"}}>
+  <button
+    class="all"
+    on:click={() => {
+      filter = "all";
+    }}
+  >
     <span> All </span>
     <div class="counter">
       {tasks.all}
     </div>
   </button>
-  <button class="completed" on:click={() => {filter = "completed"}}>
+  <button
+    class="completed"
+    on:click={() => {
+      filter = "completed";
+    }}
+  >
     <span> Completed </span>
     <div class="counter">
       {tasks.completed}
     </div>
   </button>
-  <button class="pending" on:click={() => {filter = "pending"}}>
+  <button
+    class="pending"
+    on:click={() => {
+      filter = "pending";
+    }}
+  >
     <span> Pending </span>
     <div class="counter">
       {tasks.pending}
     </div>
   </button>
-  <button class="deleted" on:click={() => {filter = "deleted"}}>
+  <button
+    class="deleted"
+    on:click={() => {
+      filter = "deleted";
+    }}
+  >
     <span> Deleted </span>
     <div class="counter">
       {tasks.deleted}

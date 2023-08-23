@@ -1,9 +1,34 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
+
   export let task;
+  export let filter;
+  export let index;
+
+  function filterContent(Task, Filter) {
+    return Filter === "deleted" && Task.deleted === true
+      ? true
+      : Task.deleted === true
+      ? false
+      : Filter === "completed" && Task.completed === true
+      ? true
+      : Filter === "pending" && Task.completed === false
+      ? true
+      : Filter === "all"
+      ? true
+      : false;
+  }
 </script>
 
-<div class="task">
-  <div class="main-context">
+<div
+  class="task"
+  style:display={filterContent(task, filter) ? "block" : "none"}
+>
+  <div
+    class="main-context"
+    style:background-color={task.important === true ? "#fcbaad" : "#fff"}
+  >
     <button
       title="Mark as completed"
       style:background-color={task.completed === true ? "lightgreen" : "yellow"}
@@ -11,13 +36,22 @@
     <div class="context">{task.context}</div>
   </div>
   <div class="sub-context">
-    <button> Delete </button>
-    <button> Edit </button>
-    <button> Mark as important </button>
-    <div class="reminder">
-      <span> Remind me at </span>
-      <input type="datetime-local" />
-    </div>
+    {#if task.deleted}
+      <button on:click={() => dispatch("delete-task", index)}> Restore </button>
+      <button on:click={() => dispatch("permanently-delete-task", index)}>
+        Permanently Delete
+      </button>
+    {:else}
+      <button on:click={() => dispatch("delete-task", index)}> Delete </button>
+      <button> Edit </button>
+      <button on:click={() => dispatch("important-task", index)}>
+        Mark as important
+      </button>
+      <div class="reminder">
+        <span> Remind me at </span>
+        <input type="datetime-local" />
+      </div>
+    {/if}
   </div>
 </div>
 
@@ -37,8 +71,6 @@
 
       border: 0.01em solid #000;
       border-radius: 1em;
-
-      background: #fff;
 
       button {
         height: 2em;

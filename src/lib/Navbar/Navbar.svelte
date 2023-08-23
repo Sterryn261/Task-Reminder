@@ -13,7 +13,7 @@
 
 <style lang="scss">
   nav {
-    position: absolute;
+    position: fixed;
     background-color: #aaa;
 
     top: 0;

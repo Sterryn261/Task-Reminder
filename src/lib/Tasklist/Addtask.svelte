@@ -19,7 +19,7 @@
       bind:value={context}
       on:input={() => {
         textarea.style.height = "auto";
-        textarea.style.height = textarea.scrollHeight + "px";
+        textarea.style.height = textarea.scrollHeight - 10 + "px";
       }}
     />
     <button type="submit">Add</button>
@@ -36,7 +36,6 @@
       font-size: 100%;
 
       width: 51%;
-      min-height: 2em;
       padding: 0.5em;
       border-radius: 1em;
     }

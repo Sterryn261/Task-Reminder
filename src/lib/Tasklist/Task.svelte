@@ -15,6 +15,8 @@
       ? true
       : Task.deleted === true
       ? false
+      : Filter === "important" && Task.important === true
+      ? true
       : Filter === "completed" && Task.completed === true
       ? true
       : Filter === "pending" && Task.completed === false

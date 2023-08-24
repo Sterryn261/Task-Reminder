@@ -28,7 +28,6 @@
   function deleteTask(elem) {
     const index = elem.detail;
     tasklist[index].deleted = !tasklist[index].deleted;
-
   }
   function importantTask(elem) {
     const index = elem.detail;

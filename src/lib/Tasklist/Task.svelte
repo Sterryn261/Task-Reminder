@@ -137,6 +137,10 @@
 
         border-top: none;
       }
+      button:hover {
+        background: #eee;
+        cursor: pointer;
+      }
       .reminder {
         background: #fff;
         border: 0.01em solid #000;

@@ -9,7 +9,7 @@
 <div class="add-task">
   <form
     on:submit|preventDefault={() => {
-      dispatch("addtask", context);
+      if (context !== null && context != "") dispatch("addtask", context);
       context = "";
     }}
   >
@@ -52,6 +52,10 @@
       font-size: 125%;
 
       background: #fff;
+    }
+    button:hover {
+      background: #eee;
+      cursor: pointer;
     }
   }
 </style>

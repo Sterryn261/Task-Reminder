@@ -8,7 +8,7 @@
     { display: "Completed", command: "completed", number: 0 },
     { display: "Pending", command: "pending", number: 0 },
     { display: "Deleted", command: "deleted", number: 0 },
-];
+  ];
   $: {
     tasks[0].number = tasklist.filter((elem) => elem.deleted === false).length;
     tasks[1].number = tasklist.filter(
@@ -20,25 +20,23 @@
     tasks[3].number = tasklist.filter(
       (elem) => elem.completed === false && elem.deleted === false
     ).length;
-    tasks[4].number = tasklist.filter(
-      (elem) => elem.deleted === true
-    ).length;
+    tasks[4].number = tasklist.filter((elem) => elem.deleted === true).length;
   }
 </script>
 
 <div class="context-filter">
   {#each tasks as task}
     <button
-    class={task.command}
-    on:click={() => {
-      filter = task.command;
-    }}
-  >
-    <span> {task.display} </span>
-    <div class="counter">
-      {task.number}
-    </div>
-  </button>
+      class={task.command}
+      on:click={() => {
+        filter = task.command;
+      }}
+    >
+      <span> {task.display} </span>
+      <div class="counter">
+        {task.number}
+      </div>
+    </button>
   {/each}
 </div>
 
@@ -69,6 +67,9 @@
 
         background: #fff;
       }
+    }
+    button:hover {
+      cursor: pointer;
     }
   }
 </style>

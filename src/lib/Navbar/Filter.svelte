@@ -2,69 +2,44 @@
   export let tasklist;
   export let filter = "all";
 
-  let tasks = {
-    all: 0,
-    completed: 0,
-    pending: 0,
-    deleted: 0,
-  };
+  let tasks = [
+    { display: "All", command: "all", number: 0 },
+    { display: "Important", command: "important", number: 0 },
+    { display: "Completed", command: "completed", number: 0 },
+    { display: "Pending", command: "pending", number: 0 },
+    { display: "Deleted", command: "deleted", number: 0 },
+];
   $: {
-    tasks.all = tasklist.filter((elem) => elem.deleted === false).length;
-    tasks.completed = tasklist.filter(
+    tasks[0].number = tasklist.filter((elem) => elem.deleted === false).length;
+    tasks[1].number = tasklist.filter(
+      (elem) => elem.important === true && elem.deleted === false
+    ).length;
+    tasks[2].number = tasklist.filter(
       (elem) => elem.completed === true && elem.deleted === false
     ).length;
-    tasks.pending = tasklist.filter(
+    tasks[3].number = tasklist.filter(
       (elem) => elem.completed === false && elem.deleted === false
     ).length;
-    tasks.deleted = tasklist.filter((elem) => elem.deleted === true).length;
+    tasks[4].number = tasklist.filter(
+      (elem) => elem.deleted === true
+    ).length;
   }
 </script>
 
 <div class="context-filter">
-  <button
-    class="all"
+  {#each tasks as task}
+    <button
+    class={task.command}
     on:click={() => {
-      filter = "all";
+      filter = task.command;
     }}
   >
-    <span> All </span>
+    <span> {task.display} </span>
     <div class="counter">
-      {tasks.all}
+      {task.number}
     </div>
   </button>
-  <button
-    class="completed"
-    on:click={() => {
-      filter = "completed";
-    }}
-  >
-    <span> Completed </span>
-    <div class="counter">
-      {tasks.completed}
-    </div>
-  </button>
-  <button
-    class="pending"
-    on:click={() => {
-      filter = "pending";
-    }}
-  >
-    <span> Pending </span>
-    <div class="counter">
-      {tasks.pending}
-    </div>
-  </button>
-  <button
-    class="deleted"
-    on:click={() => {
-      filter = "deleted";
-    }}
-  >
-    <span> Deleted </span>
-    <div class="counter">
-      {tasks.deleted}
-    </div>
-  </button>
+  {/each}
 </div>
 
 <style lang="scss">

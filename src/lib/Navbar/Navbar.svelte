@@ -8,7 +8,6 @@
 <nav>
   <div class="title">Task Reminder</div>
   <Filter bind:tasklist bind:filter />
-  <button class="edit-mode"> Edit mode </button>
 </nav>
 
 <style lang="scss">
@@ -29,14 +28,6 @@
 
       font-size: 140%;
       text-align: center;
-    }
-    .edit-mode {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      font-size: 125%;
-      height: 5%;
-      width: 100%;
     }
   }
 </style>

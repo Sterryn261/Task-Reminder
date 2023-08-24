@@ -1,10 +1,14 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, tick } from "svelte";
   const dispatch = createEventDispatcher();
 
   export let task;
   export let filter;
   export let index;
+
+  let edit;
+  let datetime;
+  let textarea;
 
   function filterContent(Task, Filter) {
     return Filter === "deleted" && Task.deleted === true
@@ -32,8 +36,24 @@
     <button
       title="Mark as completed"
       style:background-color={task.completed === true ? "lightgreen" : "yellow"}
+      on:click={() => dispatch("complete-task", index)}
     />
-    <div class="context">{task.context}</div>
+    {#if edit}
+      <textarea
+        bind:this={textarea}
+        bind:value={task.context}
+        on:input={() => {
+          textarea.style.height = "auto";
+          textarea.style.height = textarea.scrollHeight - 10 + "px";
+        }}
+        on:pointerdown={() => {
+          textarea.style.height = "auto";
+          textarea.style.height = textarea.scrollHeight - 10 + "px";
+        }}
+      />
+    {:else}
+      <div class="context">{task.context}</div>
+    {/if}
   </div>
   <div class="sub-context">
     {#if task.deleted}
@@ -41,15 +61,17 @@
       <button on:click={() => dispatch("permanently-delete-task", index)}>
         Permanently Delete
       </button>
+    {:else if edit}
+      <button on:click={() => (edit = false)}> Complete </button>
     {:else}
       <button on:click={() => dispatch("delete-task", index)}> Delete </button>
-      <button> Edit </button>
+      <button on:click={() => (edit = true)}> Edit </button>
       <button on:click={() => dispatch("important-task", index)}>
         Mark as important
       </button>
       <div class="reminder">
         <span> Remind me at </span>
-        <input type="datetime-local" />
+        <input type="datetime-local" bind:value={datetime} />
       </div>
     {/if}
   </div>
@@ -77,6 +99,23 @@
         width: 2em;
         margin-left: 1em;
         border-radius: 1em;
+      }
+      textarea {
+        resize: none;
+        overflow-y: hidden;
+
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 100%;
+
+        width: 90%;
+        border: none;
+        margin-right: 1em;
+
+        background: transparent;
+      }
+      .context {
+        width: 90%;
+        overflow-wrap: break-word;
       }
     }
     .sub-context {

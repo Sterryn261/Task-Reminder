@@ -15,6 +15,11 @@
     });
     tasklist = tasklist;
   }
+  function completeTask(elem) {
+    const index = elem.detail;
+    tasklist[index].completed = !tasklist[index].completed;
+    tasklist = tasklist;
+  }
   function permanentlyDeleteTask(elem) {
     const index = elem.detail;
     tasklist.splice(index, 1);
@@ -43,6 +48,7 @@
         bind:task
         bind:filter
         {index}
+        on:complete-task={completeTask}
         on:delete-task={deleteTask}
         on:important-task={importantTask}
         on:permanently-delete-task={permanentlyDeleteTask}

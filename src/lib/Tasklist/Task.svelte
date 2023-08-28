@@ -10,6 +10,18 @@
   let datetime;
   let textarea;
 
+  let remind;
+  function setReminder(datetime) {
+    clearTimeout(remind);
+    if (datetime !== undefined && Date.parse(datetime) - Date.now() >= 0) {
+      remind = setTimeout(() => {
+        alert(task.context);
+      }, Date.parse(datetime) - Date.now());
+    }
+  }
+
+  $: setReminder(datetime);
+
   function filterContent(Task, Filter) {
     return Filter === "deleted" && Task.deleted === true
       ? true
@@ -66,7 +78,15 @@
     {:else if edit}
       <button on:click={() => (edit = false)}> Complete </button>
     {:else}
-      <button on:click={() => dispatch("delete-task", index)}> Delete </button>
+      <button
+        on:click={() => {
+          clearTimeout(remind);
+          datetime = undefined;
+          dispatch("delete-task", index);
+        }}
+      >
+        Delete
+      </button>
       <button on:click={() => (edit = true)}> Edit </button>
       <button on:click={() => dispatch("important-task", index)}>
         Mark as important

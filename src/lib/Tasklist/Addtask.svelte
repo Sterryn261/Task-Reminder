@@ -3,13 +3,13 @@
   let dispatch = createEventDispatcher();
 
   let textarea;
-  let context;
+  let context = "";
 </script>
 
 <div class="add-task">
   <form
     on:submit|preventDefault={() => {
-      if (context !== null && context != "") dispatch("addtask", context);
+      if (context !== "") dispatch("addtask", context);
       context = "";
     }}
   >

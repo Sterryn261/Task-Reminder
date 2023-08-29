@@ -4,13 +4,20 @@
 
   let textarea;
   let context = "";
+
+  let form;
+
+  function addTask() {
+    if (context !== "") dispatch("addtask", context);
+    context = "";
+  }
 </script>
 
 <div class="add-task">
   <form
+    bind:this={form}
     on:submit|preventDefault={() => {
-      if (context !== "") dispatch("addtask", context);
-      context = "";
+      addTask();
     }}
   >
     <textarea
@@ -20,6 +27,11 @@
       on:input={() => {
         textarea.style.height = "auto";
         textarea.style.height = textarea.scrollHeight - 10 + "px";
+      }}
+      on:keydown={(e) => {
+        if (e.key === "Enter" && e.ctrlKey === true) {
+          addTask();
+        }
       }}
     />
     <button type="submit">Add</button>

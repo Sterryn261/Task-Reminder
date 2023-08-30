@@ -5,8 +5,6 @@
   let textarea;
   let context = "";
 
-  let form;
-
   function addTask() {
     if (context !== "") dispatch("addtask", context);
     context = "";
@@ -15,7 +13,6 @@
 
 <div class="add-task">
   <form
-    bind:this={form}
     on:submit|preventDefault={() => {
       addTask();
     }}

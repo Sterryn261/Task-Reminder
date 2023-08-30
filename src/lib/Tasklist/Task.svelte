@@ -54,8 +54,10 @@
       : task.important === true
       ? '--dark-important-task'
       : '--dark-task'});
-  color: var({$theme === 'light' ? '--light-text' : '--dark-text'}); 
-  border-color: var({$theme === 'light' ? '--light-border' : '--dark-border'})"
+    color: var({$theme === 'light' ? '--light-text' : '--dark-text'}); 
+    border-color: var({$theme === 'light'
+      ? '--light-border'
+      : '--dark-border'})"
   >
     <button
       title="Mark as completed"
@@ -163,7 +165,7 @@
       width: 60%;
       padding: 1em 0;
 
-      border: 0.01em solid #000;
+      border: 0.01em solid;
       border-radius: 1em;
 
       button {
@@ -197,8 +199,7 @@
       gap: 0.5em;
 
       button {
-        background: #fff;
-        border: 0.01em solid #000;
+        border: 0.01em solid;
         border-radius: 0 0 1em 1em;
         padding: 0.5em;
 
@@ -208,11 +209,9 @@
         border-top: none;
       }
       button:hover {
-        background: #eee;
         cursor: pointer;
       }
       .reminder {
-        background: #fff;
         border: 0.01em solid #000;
         border-radius: 0 0 1em 1em;
         padding: 0.2em 0.5em;

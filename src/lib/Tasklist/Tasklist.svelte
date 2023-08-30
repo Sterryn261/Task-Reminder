@@ -41,7 +41,8 @@
 <div class="tasklist">
   <Addtask on:addtask={addtask} />
   <span
-    style="color: var({$theme === 'light'
+    style="
+    color: var({$theme === 'light'
       ? '--light-description-text'
       : '--dark-description-text'})"
   >

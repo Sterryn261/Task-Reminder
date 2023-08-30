@@ -68,16 +68,14 @@
       height: 2.3em;
       width: 4em;
 
-      border: 0.01em solid #000;
+      border: 0.01em solid;
       border-radius: 0.5em;
       margin-left: 1em;
 
       font-size: 125%;
 
-      background: #fff;
     }
     button:hover {
-      background: #eee;
       cursor: pointer;
     }
   }

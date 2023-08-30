@@ -1,7 +1,30 @@
 :root {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: aliceblue;
   min-height: 100% !important;
 
   font-size: 100%;
+  
+  --light-text: #000;
+  --light-description-text: #757575;
+  --light-border: #000;
+  
+  --light-button: #fff ;
+  --light-button-hover: #757575;
+  --light-button-active: #595858;
+  
+  --light-task: #fff;
+  --light-title: #fff;
+  --light-navbar: #eee;
+
+  --dark-text: #fff;
+  --dark-description-text: #bfbfbf;
+  --dark-border: #fff;
+  
+  --dark-button: #555;
+  --dark-button-hover: #999;
+  --dark-button-active: #aaa;
+
+  --dark-task: #000;
+  --dark-title: #000;
+  --dark-navbar: #222;
 }

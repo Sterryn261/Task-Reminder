@@ -1,6 +1,7 @@
 <script>
   import Addtask from "./Addtask.svelte";
   import Task from "./Task.svelte";
+  import { theme } from "../../stores";
 
   export let tasklist;
   export let filter;
@@ -39,7 +40,13 @@
 
 <div class="tasklist">
   <Addtask on:addtask={addtask} />
-  <span> Or using Ctrl + Enter to add.</span>
+  <span
+    style="color: var({$theme === 'light'
+      ? '--light-description-text'
+      : '--dark-description-text'})"
+  >
+    Or using Ctrl + Enter to add.</span
+  >
 
   <div class="tasks">
     {#each tasklist as task, index}
@@ -52,8 +59,6 @@
         on:important-task={importantTask}
         on:permanently-delete-task={permanentlyDeleteTask}
       />
-    {:else}
-      <span> Nothing here</span>
     {/each}
   </div>
 </div>
@@ -61,9 +66,6 @@
 <style lang="scss">
   .tasklist {
     margin-left: 15em;
-
-    span {
-      color: #aaa;
-    }
+    margin-top: 1em;
   }
 </style>

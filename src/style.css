@@ -3,7 +3,7 @@
   min-height: 100% !important;
 
   font-size: 100%;
-  
+  /* Light theme */
   --light-text: #000;
   --light-description-text: #757575;
   --light-border: #000;
@@ -13,9 +13,11 @@
   --light-button-active: #595858;
   
   --light-task: #fff;
+  --light-important-task: #fea1a1;
   --light-title: #fff;
   --light-navbar: #eee;
 
+  /* Dark theme */
   --dark-text: #fff;
   --dark-description-text: #bfbfbf;
   --dark-border: #fff;
@@ -24,7 +26,8 @@
   --dark-button-hover: #999;
   --dark-button-active: #aaa;
 
-  --dark-task: #000;
+  --dark-task: #272829;
+  --dark-important-task: #630606;
   --dark-title: #000;
   --dark-navbar: #222;
 }

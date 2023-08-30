@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
+  import { theme } from "../../stores";
 
   export let task;
   export let filter;
@@ -45,7 +46,16 @@
 >
   <div
     class="main-context"
-    style:background-color={task.important === true ? "#fcbaad" : "#fff"}
+    style="
+    background: var({$theme === 'light'
+      ? task.important === true
+        ? '--light-important-task'
+        : '--light-task'
+      : task.important === true
+      ? '--dark-important-task'
+      : '--dark-task'});
+  color: var({$theme === 'light' ? '--light-text' : '--dark-text'}); 
+  border-color: var({$theme === 'light' ? '--light-border' : '--dark-border'})"
   >
     <button
       title="Mark as completed"
@@ -84,14 +94,54 @@
           datetime = undefined;
           dispatch("delete-task", index);
         }}
+        style="
+        background: var({$theme === 'light'
+          ? '--light-button'
+          : '--dark-button'});
+        color: var({$theme === 'light' ? '--light-text' : '--dark-text'}); 
+        border-color: var({$theme === 'light'
+          ? '--light-border'
+          : '--dark-border'})"
       >
         Delete
       </button>
-      <button on:click={() => (edit = true)}> Edit </button>
-      <button on:click={() => dispatch("important-task", index)}>
+      <button
+        on:click={() => (edit = true)}
+        style="
+        background: var({$theme === 'light'
+          ? '--light-button'
+          : '--dark-button'});
+        color: var({$theme === 'light' ? '--light-text' : '--dark-text'}); 
+        border-color: var({$theme === 'light'
+          ? '--light-border'
+          : '--dark-border'})"
+      >
+        Edit
+      </button>
+      <button
+        on:click={() => dispatch("important-task", index)}
+        style="
+        background: var({$theme === 'light'
+          ? '--light-button'
+          : '--dark-button'});
+        color: var({$theme === 'light' ? '--light-text' : '--dark-text'}); 
+        border-color: var({$theme === 'light'
+          ? '--light-border'
+          : '--dark-border'})"
+      >
         Mark as important
       </button>
-      <div class="reminder">
+      <div
+        class="reminder"
+        style="
+      background: var({$theme === 'light'
+          ? '--light-button'
+          : '--dark-button'});
+      color: var({$theme === 'light' ? '--light-text' : '--dark-text'}); 
+      border-color: var({$theme === 'light'
+          ? '--light-border'
+          : '--dark-border'})"
+      >
         <span> Remind me at </span>
         <input type="datetime-local" bind:value={datetime} />
       </div>

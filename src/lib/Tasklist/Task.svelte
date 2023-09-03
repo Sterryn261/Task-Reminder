@@ -20,7 +20,7 @@
       }, Date.parse(datetime) - Date.now());
     }
   }
-
+  setReminder(datetime);
   $: setReminder(datetime);
 
   function filterContent(Task, Filter) {
@@ -61,7 +61,7 @@
   >
     <button
       title="Mark as completed"
-      style:background-color={task.completed === true ? "lightgreen" : "yellow"}
+      style="background-color:{task.completed === true ? "lightgreen" : "yellow"}"
       on:click={() => dispatch("complete-task", index)}
     />
     {#if edit}
@@ -76,6 +76,9 @@
           textarea.style.height = "auto";
           textarea.style.height = textarea.scrollHeight - 10 + "px";
         }}
+        style="color: var({$theme === 'light'
+          ? '--light-text'
+          : '--dark-text'})"
       />
     {:else}
       <div class="context">{task.context}</div>
@@ -88,7 +91,19 @@
         Permanently Delete
       </button>
     {:else if edit}
-      <button on:click={() => (edit = false)}> Complete </button>
+      <button
+        on:click={() => (edit = false)}
+        style="
+        background: var({$theme === 'light'
+          ? '--light-button'
+          : '--dark-button'});
+        color: var({$theme === 'light' ? '--light-text' : '--dark-text'}); 
+        border-color: var({$theme === 'light'
+          ? '--light-border'
+          : '--dark-border'})"
+      >
+        Complete
+      </button>
     {:else}
       <button
         on:click={() => {

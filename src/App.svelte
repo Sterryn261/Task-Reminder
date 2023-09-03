@@ -1,28 +1,19 @@
 <script>
+  import { onMount } from "svelte";
   import Navbar from "./lib/Navbar/Navbar.svelte";
   import Tasklist from "./lib/Tasklist/Tasklist.svelte";
   import { theme } from "./stores";
 
-  let tasklist = [
-    {
-      context: "aaaaa",
-      completed: true,
-      important: true,
-      deleted: false,
-    },
-    {
-      context: "abcde",
-      completed: false,
-      important: true,
-      deleted: false,
-    },
-    {
-      context: "nothing",
-      completed: false,
-      important: false,
-      deleted: false,
-    },
-  ];
+  let tasklist = [];
+  onMount(() => {
+    if (localStorage.getItem("theme") === null) {
+      $theme = "dark";
+    } else {
+      $theme = localStorage.getItem("theme");
+    }
+    tasklist = JSON.parse(localStorage.getItem("tasklist"));
+  });
+
   let filter;
 </script>
 

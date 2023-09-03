@@ -61,7 +61,9 @@
   >
     <button
       title="Mark as completed"
-      style="background-color:{task.completed === true ? "lightgreen" : "yellow"}"
+      style="background-color:{task.completed === true
+        ? 'lightgreen'
+        : 'yellow'}"
       on:click={() => dispatch("complete-task", index)}
     />
     {#if edit}
@@ -86,8 +88,30 @@
   </div>
   <div class="sub-context">
     {#if task.deleted}
-      <button on:click={() => dispatch("delete-task", index)}> Restore </button>
-      <button on:click={() => dispatch("permanently-delete-task", index)}>
+      <button
+        on:click={() => dispatch("delete-task", index)}
+        style="
+        background: var({$theme === 'light'
+          ? '--light-button'
+          : '--dark-button'});
+        color: var({$theme === 'light' ? '--light-text' : '--dark-text'}); 
+        border-color: var({$theme === 'light'
+          ? '--light-border'
+          : '--dark-border'})"
+      >
+        Restore
+      </button>
+      <button
+        on:click={() => dispatch("permanently-delete-task", index)}
+        style="
+        background: var({$theme === 'light'
+          ? '--light-button'
+          : '--dark-button'});
+        color: var({$theme === 'light' ? '--light-text' : '--dark-text'}); 
+        border-color: var({$theme === 'light'
+          ? '--light-border'
+          : '--dark-border'})"
+      >
         Permanently Delete
       </button>
     {:else if edit}

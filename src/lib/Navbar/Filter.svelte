@@ -1,5 +1,6 @@
 <script>
   import { theme } from "../../stores";
+  import styleTheme from "../theme";
 
   export let tasklist;
   export let filter = "all";
@@ -73,20 +74,22 @@
       on:click={() => {
         filter = task.command;
       }}
-      style="background: {$theme === 'light'
-        ? task.lightBg
-        : task.darkBg};
-color: {$theme === 'light' ? task.lightText : task.darkText};
-border-color: var({$theme === 'light' ? '--light-border' : '--dark-border'})"
+      style="background: {$theme === 'light' ? task.lightBg : task.darkBg};
+            color: {$theme === 'light' ? task.lightText : task.darkText};
+            border-color: var({$theme === 'light' ? '--light-border' : '--dark-border'})"
     >
       <span> {task.display} </span>
       <div
         class="counter"
-        style="background: var({$theme === 'light'
-          ? '--light-button'
-          : '--dark-button'});
-  color: var({$theme === 'light' ? '--light-text' : '--dark-text'});
-  border-color: var({$theme === 'light' ? '--light-border' : '--dark-border'})"
+        style="background: {filter === task.command
+          ? styleTheme($theme, 'button', true)
+          : styleTheme($theme, 'button', false)};
+  color: {filter === task.command
+          ? styleTheme($theme, 'text', true)
+          : styleTheme($theme, 'text', false)};
+  border-color: {filter === task.command
+          ? styleTheme($theme, 'border', true)
+          : styleTheme($theme, 'border', false)}"
       >
         {task.number}
       </div>

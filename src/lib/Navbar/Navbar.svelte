@@ -1,5 +1,7 @@
 <script>
   import { theme } from "../../stores";
+  import styleTheme from "../theme";
+
   import Filter from "./Filter.svelte";
 
   export let tasklist;
@@ -7,19 +9,13 @@
 </script>
 
 <nav
-  style="background: var({$theme === 'light'
-    ? '--light-navbar'
-    : '--dark-navbar'});
-            border-color: var({$theme === 'light'
-    ? '--light-border'
-    : '--dark-border'})"
+  style="background: {styleTheme($theme, 'navbar', false)};
+        border-color: {styleTheme($theme, 'border', false)}"
 >
   <div
     class="title"
-    style="background: var({$theme === 'light'
-      ? '--light-title'
-      : '--dark-title'});
-      color: var({$theme === 'light' ? '--light-text' : '--dark-text'})"
+    style="background: {styleTheme($theme, 'title', false)};
+      color: {styleTheme($theme, 'text', false)}"
   >
     Task Reminder
   </div>
@@ -29,11 +25,9 @@
     on:click={() => {
       $theme === "light" ? theme.set("dark") : theme.set("light");
     }}
-    style="background: var({$theme === 'light'
-      ? '--light-button'
-      : '--dark-button'});
-  color: var({$theme === 'light' ? '--light-text' : '--dark-text'}); 
-  border-color: var({$theme === 'light' ? '--light-border' : '--dark-border'})"
+    style="background: {styleTheme($theme, 'button', false)};
+  color: {styleTheme($theme, 'text', false)}; 
+  border-color: v{styleTheme($theme, 'border', false)}"
   >
     Light - Dark mode
   </button>

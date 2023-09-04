@@ -1,7 +1,9 @@
 <script>
   import { createEventDispatcher } from "svelte";
   let dispatch = createEventDispatcher();
+
   import { theme } from "../../stores";
+  import styleTheme from "../theme";
 
   let textarea;
   let context = "";
@@ -20,11 +22,9 @@
   >
     <textarea
       placeholder="New task..."
-      style="background: var({$theme === 'light'
-        ? '--light-task'
-        : '--dark-task'});
-  color: var({$theme === 'light' ? '--light-text' : '--dark-text'}); 
-  border-color: var({$theme === 'light' ? '--light-border' : '--dark-border'})"
+      style="background: {styleTheme($theme, "task", false)};
+        color: {styleTheme($theme, "text", false)};
+        border-color: {styleTheme($theme, "border", false)};"
       bind:this={textarea}
       bind:value={context}
       on:input={() => {
@@ -39,11 +39,9 @@
     />
     <button
       type="submit"
-      style="background: var({$theme === 'light'
-        ? '--light-button'
-        : '--dark-button'});
-  color: var({$theme === 'light' ? '--light-text' : '--dark-text'}); 
-  border-color: var({$theme === 'light' ? '--light-border' : '--dark-border'})"
+      style="background: {styleTheme($theme, "button", false)};
+      color: {styleTheme($theme, "text", false)};
+      border-color: {styleTheme($theme, "border", false)};"
       >Add</button
     >
   </form>

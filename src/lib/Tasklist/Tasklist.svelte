@@ -1,7 +1,9 @@
 <script>
   import Addtask from "./Addtask.svelte";
   import Task from "./Task.svelte";
+
   import { theme } from "../../stores";
+  import styleTheme from "../theme";
 
   export let tasklist;
   export let filter;
@@ -49,9 +51,7 @@
   <Addtask on:addtask={addtask} />
   <span
     style="
-    color: var({$theme === 'light'
-      ? '--light-description-text'
-      : '--dark-description-text'})"
+    color: {styleTheme($theme, "description-text", false)}"
   >
     Or using Ctrl + Enter to add.</span
   >

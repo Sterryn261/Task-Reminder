@@ -20,7 +20,7 @@
       command: "important",
       number: 0,
       lightBg: "#FF9B9B",
-      darkBg: "#FF4C29",
+      darkBg: "#C63D2F",
       lightText: "#000",
       darkText: "#fff",
     },
